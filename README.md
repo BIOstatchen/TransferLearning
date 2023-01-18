@@ -8,7 +8,7 @@ Due to ethnic heterogeneity in genetic structure, genetic risk scores (GRS) cons
 
 
 # Example
-
+```ruby
 library(glmnet)
 source("lmm_PXEM_Rcpp.R")
 source("estimate_beta.R")
@@ -34,7 +34,7 @@ fit = lmm_pxem2_ZPcisSNP(y, X=cbind(1, X, g), G=G, PXEM=TRUE, maxIter=1000)
 //' @param G  genotype matrix for GWAS
 //' @param maxIter  maximum iteration (default is 1000)
 
-
+```
 
 
 
