@@ -10,8 +10,33 @@ Due to ethnic heterogeneity in genetic structure, genetic risk scores (GRS) cons
 # Example
 ```ruby
 library(glmnet)
-source("lmm_PXEM_Rcpp.R")
-source("estimate_beta.R")
+library(Rcpp)
+library(RcppArmadillo)
+sourceCpp("lmm_PXEM.cpp")
+G_EUR=read.table("G_EUR.txt",head=T)
+y=read.table("y_EUR.txt",head=T)
+X=read.table("X_EUR.txt",head=T)
+fit_EUR <- lmm_PXEM(y, X=X, G=G_EUR, PXEM=TRUE, maxIter=1000)
+beta_EUR<-as.data.frame(fit_EUR$mub)
+beta_EUR=as.matrix(beta_EUR)
+G_EUR=as.matrix(G_EUR)
+GRS_EUR<-G_EUR*beta_EUR
+
+
+G_EAS=read.table("G_EAS.txt",head=T)
+y=read.table("y_EAS.txt",head=T)
+X=read.table("X_EAS.txt",head=T)
+fit_EAS <- lmm_PXEM(y, X=X, G=G_EAS, PXEM=TRUE, maxIter=1000)
+beta_EAS<-as.data.frame(fit_EAS$mub)
+beta_EAS=as.matrix(beta_EAS)
+G_EAS=as.matrix(G_EAS)
+GRS_EAS<-G_EAS*beta_EAS
+x<-(G_EAS %*% beta_EAS)
+n<-dim(beta_EAS)
+fit<-glmnet(x=cbind(x,G_EAS),y=y,alpha=0,penalty.factor=c(0,rep(1,n)),family="gaussian",standardize=TRUE)
+coeff<-as.matrix(coef(fit,s="lambda.min"))
+
+
 BETA=read.table("BETA.txt",head=T) ## BETA is the effect size of SNPs in base population from summary statistics and SE is their standard error.
 SE=read.table("SE.txt",head=T)
 R=read.table("R.txt",head=T) ## R is the linkage disequilibrium (LD) matrix which can be calculated with genotypes of population-matched individuals from external reference panels such as the 1000 Genomes Project in the base population. We calculate R in a shrinkage fashion R = 0.95 * as.matrix(cor(G_base_population)) + diag(1-0.95, nrow=nSNPs, ncol=nSNPs)
@@ -30,8 +55,8 @@ fit = lmm_pxem2_ZPcisSNP(y, X=cbind(1, X, g), G=G, PXEM=TRUE, maxIter=1000)
 
 //' @param y  response variable
 //' @param X  covariates
-//' @param g  GRS = G*weight is the GRS information
-//' @param G  genotype matrix for GWAS
+//' @param GRS  GRS = G*beta is the GRS information
+//' @param G  genotype matrix for SNPs
 //' @param maxIter  maximum iteration (default is 1000)
 
 ```
