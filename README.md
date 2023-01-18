@@ -49,7 +49,7 @@ fit = lmm_pxem2_ZPcisSNP(y, X=cbind(1, X, g), G=G, PXEM=TRUE, maxIter=1000)
 
 
 # Cite
-Wenying Chen, Shuiping Huang and Ping Zeng (2022). Transfer learning prediction of early exposures and genetic risk score on adult obesity in two minority UK Biobank cohorts.$$$#
+Wenying Chen, Shuiping Huang and Ping Zeng (2023). Transfer learning prediction of early exposures and genetic risk score on adult obesity in two minority UK Biobank cohorts.$$$#
 
 
 
