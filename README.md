@@ -104,17 +104,10 @@ GRS_EAS_TransferLearning<-G_EAS*BETA_EAS ## denotes the Post transfer Learning g
 //' @param G  genotype matrix for SNPs
 //' @param maxIter  maximum iteration (default is 1000)
 
-
-
-
-
-
-
-
-
 ```
 # Cite
 Wenying Chen, Shuiping Huang and Ping Zeng (2023). Transfer learning prediction of early exposures and genetic risk score on adult obesity in two minority UK Biobank cohorts.$$$#
+
 Wenying Chen, Shuiping Huang and Ping Zeng (2023). Accurate prediction models for the target population through transfer learning shared information from auxiliary populations.$$$#
 
 
