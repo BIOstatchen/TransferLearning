@@ -53,7 +53,7 @@ GRS_EAS_TransferLearning<-G_EAS*BETA_EAS ## denotes the Post transfer Learning g
 
 ```
 
-# Example
+# Example1
 ```ruby
 library(glmnet)
 library(Rcpp)
